@@ -3,6 +3,7 @@ package klook.xin.controller;
 import klook.xin.entity.User;
 import klook.xin.service.RegService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +20,8 @@ public class APIController {
     private RegService mRegService;
 
     @RequestMapping("/getUser")
-    User getUser(HttpServletRequest request) {
-        return mRegService.select("10");
+    User getUser(@RequestBody User u) {
+        return mRegService.select(u.getId());
     }
 
 
@@ -29,4 +30,8 @@ public class APIController {
         return mRegService.select();
     }
 
+    @RequestMapping("/getUserById")
+    User getUser(String id) {
+        return mRegService.select(id);
+    }
 }
